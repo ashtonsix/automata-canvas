@@ -57,8 +57,10 @@ exports['default'] = _react2['default'].createClass({
     var cellSize = this.cellSize();
     var dimensionsChanged = this.dimensionsChanged();
 
-    this.colors = data.map(function (row) {
-      return row.map(toColor);
+    this.colors = data.map(function (row, y) {
+      return row.map(function (v, x) {
+        return toColor(v, x, y);
+      });
     });
 
     this.colors.forEach(function (row, y) {
