@@ -16,6 +16,6 @@ Usage
   ]}
 />
 ```
-![example](./readmeExample.svg)
+![example](https://raw.githubusercontent.com/Demi-IO/automata-canvas/master/readmeExample.svg)
 
 ##### toColor :: (value, x, y) => color
