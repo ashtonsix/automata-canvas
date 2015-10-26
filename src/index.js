@@ -36,7 +36,7 @@ export default React.createClass({
     const cellSize = this.cellSize();
     const dimensionsChanged = this.dimensionsChanged();
 
-    this.colors = data.map(row => row.map(toColor));
+    this.colors = data.map((row, y) => row.map((v, x) => toColor(v, x, y)));
 
     this.colors.forEach((row, y) => row.forEach((color, x) => {
       if (dimensionsChanged || (this.oldColors[y] || [])[x] !== color) {
