@@ -1,9 +1,18 @@
 import React from 'react';
 
+const {floor} = Math;
+
 export default React.createClass({
   propTypes: {
     toColor: React.PropTypes.func,
+    onClick: React.PropTypes.func,
     data: React.PropTypes.array,
+  },
+
+  getDefaultProps() {
+    return {
+      onClick: () => null,
+    };
   },
 
   componentWillUpdate() {
@@ -18,7 +27,7 @@ export default React.createClass({
   cellSize() {
     const {data} = this.props;
     const containerWidth = this.refs.canvas.parentNode.offsetWidth;
-    return Math.floor(containerWidth / data[0].length);
+    return floor(containerWidth / data[0].length);
   },
 
   updateCanvas() {
@@ -40,15 +49,15 @@ export default React.createClass({
   },
 
   render() {
-    let dimensions;
-    const {data} = this.props;
+    let dimensions; let cellSize = 1;
+    const {data, onClick} = this.props;
 
     // setTimeout & ref check cover 3 edge cases:
     // parentNode resized
     // data shape changed
     // first render
     if (this.refs.canvas) {
-      const cellSize = this.cellSize();
+      cellSize = this.cellSize();
       dimensions = {width: data[0].length * cellSize, height: data.length * cellSize};
       setTimeout(this.updateCanvas);
     } else {
@@ -56,8 +65,17 @@ export default React.createClass({
       setTimeout(::this.forceUpdate);
     }
 
+    const onClickWCoords = e => onClick(e, floor(e.offsetX / cellSize), floor(e.offsetY / cellSize));
+
     this.width = data[0].length;
     this.height = data.length;
-    return <canvas ref='canvas' {...dimensions} style={{imageRendering: 'pixelated'}}/>;
+    return (
+      <canvas
+        ref='canvas'
+        {...dimensions}
+        onClick={onClickWCoords}
+        style={{imageRendering: 'pixelated'}}
+      />
+    );
   },
 });

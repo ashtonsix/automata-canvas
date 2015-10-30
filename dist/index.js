@@ -12,12 +12,21 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var floor = Math.floor;
 exports['default'] = _react2['default'].createClass({
   displayName: 'index',
 
   propTypes: {
     toColor: _react2['default'].PropTypes.func,
+    onClick: _react2['default'].PropTypes.func,
     data: _react2['default'].PropTypes.array },
+
+  getDefaultProps: function getDefaultProps() {
+    return {
+      onClick: function onClick() {
+        return null;
+      } };
+  },
 
   componentWillUpdate: function componentWillUpdate() {
     this.oldColors = this.colors;
@@ -32,7 +41,7 @@ exports['default'] = _react2['default'].createClass({
     var data = this.props.data;
 
     var containerWidth = this.refs.canvas.parentNode.offsetWidth;
-    return Math.floor(containerWidth / data[0].length);
+    return floor(containerWidth / data[0].length);
   },
 
   updateCanvas: function updateCanvas() {
@@ -69,15 +78,17 @@ exports['default'] = _react2['default'].createClass({
   },
 
   render: function render() {
-    var dimensions = undefined;
-    var data = this.props.data;
+    var dimensions = undefined;var cellSize = 1;
+    var _props2 = this.props;
+    var data = _props2.data;
+    var onClick = _props2.onClick;
 
     // setTimeout & ref check cover 3 edge cases:
     // parentNode resized
     // data shape changed
     // first render
     if (this.refs.canvas) {
-      var cellSize = this.cellSize();
+      cellSize = this.cellSize();
       dimensions = { width: data[0].length * cellSize, height: data.length * cellSize };
       setTimeout(this.updateCanvas);
     } else {
@@ -85,8 +96,17 @@ exports['default'] = _react2['default'].createClass({
       setTimeout(this.forceUpdate.bind(this));
     }
 
+    var onClickWCoords = function onClickWCoords(e) {
+      return onClick(e, floor(e.offsetX / cellSize), floor(e.offsetY / cellSize));
+    };
+
     this.width = data[0].length;
     this.height = data.length;
-    return _react2['default'].createElement('canvas', _extends({ ref: 'canvas' }, dimensions, { style: { imageRendering: 'pixelated' } }));
+    return _react2['default'].createElement('canvas', _extends({
+      ref: 'canvas'
+    }, dimensions, {
+      onClick: onClickWCoords,
+      style: { imageRendering: 'pixelated' }
+    }));
   } });
 module.exports = exports['default'];
