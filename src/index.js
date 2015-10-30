@@ -65,7 +65,14 @@ export default React.createClass({
       setTimeout(::this.forceUpdate);
     }
 
-    const onClickWCoords = e => onClick(e, floor(e.offsetX / cellSize), floor(e.offsetY / cellSize));
+    const onClickWCoords = e => {
+      const {top, left} = e.target.getBoundingClientRect();
+      return onClick(
+        e,
+        floor((e.clientX - left) / cellSize),
+        floor((e.clientY - top) / cellSize)
+      );
+    };
 
     this.width = data[0].length;
     this.height = data.length;
