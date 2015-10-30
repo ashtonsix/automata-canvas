@@ -35,12 +35,6 @@ exports['default'] = _react2['default'].createClass({
     return Math.floor(containerWidth / data[0].length);
   },
 
-  dimensionsChanged: function dimensionsChanged() {
-    var data = this.props.data;
-
-    return this.width !== data[0].length || this.height !== data.length;
-  },
-
   updateCanvas: function updateCanvas() {
     var _this = this;
 
@@ -55,12 +49,8 @@ exports['default'] = _react2['default'].createClass({
     var canvas = this.refs.canvas;
     var context = canvas.getContext('2d');
     var cellSize = this.cellSize();
-    var dimensionsChanged = this.dimensionsChanged();
 
-    if (dimensionsChanged) {
-      context.scale(cellSize, cellSize);
-      context.setTransform(1, 0, 0, 1, 0, 0);
-    }
+    context.setTransform(cellSize, 0, 0, cellSize, 0, 0);
 
     this.colors = data.map(function (row, y) {
       return row.map(function (v, x) {

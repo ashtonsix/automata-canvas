@@ -21,25 +21,13 @@ export default React.createClass({
     return Math.floor(containerWidth / data[0].length);
   },
 
-  dimensionsChanged() {
-    const {data} = this.props;
-    return (
-      this.width !== data[0].length ||
-      this.height !== data.length
-    );
-  },
-
   updateCanvas() {
     const {data = [], toColor = v => v} = this.props;
     const canvas = this.refs.canvas;
     const context = canvas.getContext('2d');
     const cellSize = this.cellSize();
-    const dimensionsChanged = this.dimensionsChanged();
 
-    if (dimensionsChanged) {
-      context.scale(cellSize, cellSize);
-      context.setTransform(1, 0, 0, 1, 0, 0);
-    }
+    context.setTransform(cellSize, 0, 0, cellSize, 0, 0);
 
     this.colors = data.map((row, y) => row.map((v, x) => toColor(v, x, y)));
 
