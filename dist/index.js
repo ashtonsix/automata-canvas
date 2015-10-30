@@ -87,6 +87,6 @@ exports['default'] = _react2['default'].createClass({
 
     this.width = data[0].length;
     this.height = data.length;
-    return _react2['default'].createElement('canvas', _extends({ ref: 'canvas' }, dimensions));
+    return _react2['default'].createElement('canvas', _extends({ ref: 'canvas' }, dimensions, { style: { imageRendering: 'pixelated' } }));
   } });
 module.exports = exports['default'];
