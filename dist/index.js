@@ -97,7 +97,12 @@ exports['default'] = _react2['default'].createClass({
     }
 
     var onClickWCoords = function onClickWCoords(e) {
-      return onClick(e, floor(e.offsetX / cellSize), floor(e.offsetY / cellSize));
+      var _e$target$getBoundingClientRect = e.target.getBoundingClientRect();
+
+      var top = _e$target$getBoundingClientRect.top;
+      var left = _e$target$getBoundingClientRect.left;
+
+      return onClick(e, floor((e.clientX - left) / cellSize), floor((e.clientY - top) / cellSize));
     };
 
     this.width = data[0].length;
