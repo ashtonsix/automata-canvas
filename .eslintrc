@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb/base",
+  "extends": "airbnb",
   "rules": {
     // THIS IS SPARTA!!
     "id-length": 0,
@@ -7,5 +7,7 @@
     "no-nested-ternary": 0,
     // console is my friend
     "no-console": 0,
+    // quotes should be consistent
+    "jsx-quotes": [2, "prefer-single"]
   }
 }

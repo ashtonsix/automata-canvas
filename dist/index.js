@@ -57,6 +57,11 @@ exports['default'] = _react2['default'].createClass({
     var cellSize = this.cellSize();
     var dimensionsChanged = this.dimensionsChanged();
 
+    if (dimensionsChanged) {
+      context.scale(cellSize, cellSize);
+      context.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
     this.colors = data.map(function (row, y) {
       return row.map(function (v, x) {
         return toColor(v, x, y);
@@ -65,9 +70,9 @@ exports['default'] = _react2['default'].createClass({
 
     this.colors.forEach(function (row, y) {
       return row.forEach(function (color, x) {
-        if (dimensionsChanged || (_this.oldColors[y] || [])[x] !== color) {
+        if ((_this.oldColors[y] || [])[x] !== color) {
           context.fillStyle = color;
-          context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+          context.fillRect(x, y, 1, 1);
         }
       });
     });
