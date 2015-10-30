@@ -58,6 +58,6 @@ export default React.createClass({
 
     this.width = data[0].length;
     this.height = data.length;
-    return <canvas ref='canvas' {...dimensions}/>;
+    return <canvas ref='canvas' {...dimensions} style={{imageRendering: 'pixelated'}}/>;
   },
 });
