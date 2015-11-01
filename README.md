@@ -63,11 +63,6 @@ Return either the `newValue` or an object w/ the keys `data` & `meta`. `meta` is
 ##### `running     :: bool`
 
 ### Methods
-
-Call methods on `AutomataRunner` like this:
-
-`<Automata {...{initialData, tick}} ref='auto'/>` & somewhere else: `this.refs.auto.data()`
-
 `data` & `meta` behave like getters or setters depending on whether you supply an argument.
 
 ##### `data :: undefined | newData`
