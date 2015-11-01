@@ -21,7 +21,7 @@ export default class Runner extends Component {
     onChange: () => null,
     tick: v => v,
     refreshRate: 1000,
-    running: false,
+    running: true,
   }
 
   constructor(props) {
@@ -63,6 +63,10 @@ export default class Runner extends Component {
   }
 
   data() {
+    return this.state.data;
+  }
+
+  meta() {
     return this.state.data;
   }
 
