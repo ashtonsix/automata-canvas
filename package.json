@@ -1,6 +1,6 @@
 {
   "name": "automata-canvas",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Performant React component for displaying 2d arrays.",
   "main": "dist/index.js",
   "scripts": {
