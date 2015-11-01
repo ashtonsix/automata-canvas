@@ -62,12 +62,14 @@ export default class Runner extends Component {
     clearInterval(this.interval);
   }
 
-  data() {
+  data(data) {
+    if (data) { this.setState({data}); return data; }
     return this.state.data;
   }
 
-  meta() {
-    return this.state.data;
+  meta(meta) {
+    if (meta) { this.setState({meta}); return meta; }
+    return this.state.meta;
   }
 
   render() {

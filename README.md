@@ -36,22 +36,29 @@ import {AutomataRunner as Automata} from 'automata-canvas'
 API
 ===
 
-### Base
+## Base
 
 ##### `data    :: 2d array`
 ##### `toColor :: (value, x, y) => color`
 ##### `onClick :: (value, x, y) => sideEffect`
 
-### Runner
-`data` should be named `initialData`. `toColor` & `onClick` are not changed. These are additional arguments:
+## Runner
+`data` should be named `initialData`. `toColor` & `onClick` are the same. Additional arguments:
 
-##### `onChange   :: (newValue, meta) => sideEffect`
-You can also use the `data` & `meta` methods like so:
-
-`<Automata {...{initialData, tick}} ref='auto'/>` & somewhere else: `this.refs.auto.data()`.
-
-##### `tick       :: (value, meta) => (newValue | {data: newValue, meta})`
+##### `onChange    :: (newValue, meta) => sideEffect`
+##### `tick        :: (value, meta) => (newValue | {data: newValue, meta})`
 Return either the `newValue` or an object w/ the keys `data` & `meta`. `meta` is not shown & is for purposes like hiding, or caching parts of the data(see [Hashlife](https://en.wikipedia.org/wiki/Hashlife)).
 
 ##### `refreshRate :: msBetweenTicks`
 ##### `running     :: bool`
+
+### Methods
+
+Call methods on `AutomataRunner` like this:
+
+`<Automata {...{initialData, tick}} ref='auto'/>` & somewhere else: `this.refs.auto.data()`
+
+`data` & `meta` behave like getters or setters depending on whether you supply an argument.
+
+##### `data :: undefined | newData`
+##### `meta :: undefined | newMeta`
