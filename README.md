@@ -40,7 +40,7 @@ API
 
 ##### `data    :: 2d array`
 ##### `toColor :: (value, x, y) => color`
-##### `onClick :: (value, x, y) => sideEffect`
+##### `onClick :: (mouseEvent, value, x, y) => sideEffect`
 
 ## Runner
 `data` should be named `initialData`. `toColor` & `onClick` are the same. Additional arguments:

@@ -24,6 +24,9 @@ var _Base = require('./Base');
 
 var _Base2 = _interopRequireDefault(_Base);
 
+var slice = function slice(arr) {
+  return arr.slice();
+};
 var compare = function compare(o1, o2, keys) {
   return keys.some(function (k) {
     return o1[k] !== o2[k];
@@ -87,7 +90,7 @@ var Runner = (function (_Component) {
           meta = _temp.meta;
           _temp;
         }_this2.setState({ data: data, meta: meta });
-        onChange(data, meta);
+        onChange(data.map(slice), meta);
       };
       f();
       this.interval = setInterval(f, refreshRate);
@@ -103,7 +106,7 @@ var Runner = (function (_Component) {
       if (_data) {
         this.setState({ data: _data });return _data;
       }
-      return this.state.data;
+      return this.state.data.map(slice);
     }
   }, {
     key: 'meta',
@@ -111,7 +114,7 @@ var Runner = (function (_Component) {
       if (_meta) {
         this.setState({ meta: _meta });return _meta;
       }
-      return this.state.meta;
+      return this.state.meta.map(slice);
     }
   }, {
     key: 'render',

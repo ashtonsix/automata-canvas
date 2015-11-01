@@ -104,13 +104,16 @@ var Base = (function (_Component) {
         setTimeout(this.forceUpdate.bind(this));
       }
 
-      var onClickWCoords = function onClickWCoords(e) {
+      var onClickWithCoords = function onClickWithCoords(e) {
         var _e$target$getBoundingClientRect = e.target.getBoundingClientRect();
 
         var top = _e$target$getBoundingClientRect.top;
         var left = _e$target$getBoundingClientRect.left;
 
-        return onClick(e, floor((e.clientX - left) / cellSize), floor((e.clientY - top) / cellSize));
+        var x = floor((e.clientX - left) / cellSize);
+        var y = floor((e.clientY - top) / cellSize);
+        console.log(data[y][x], x, y);
+        return onClick(e, data[y][x], x, y);
       };
 
       this.width = data[0].length;
@@ -118,7 +121,7 @@ var Base = (function (_Component) {
       return _react2['default'].createElement('canvas', _extends({
         ref: 'canvas'
       }, dimensions, {
-        onClick: onClickWCoords,
+        onClick: onClickWithCoords,
         style: { imageRendering: 'pixelated' }
       }));
     }
