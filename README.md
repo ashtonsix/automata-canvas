@@ -17,7 +17,7 @@ Usage
   ]}
 />
 ```
-![example](https://raw.githubusercontent.com/Demi-IO/automata-canvas/master/readmeExample.svg)
+![example](https://cdn.rawgit.com/Demi-IO/automata-canvas/master/readmeExample.svg)
 
 ##### toColor :: (value, x, y) => color
 ##### onClick :: (value, x, y) => sideEffect
