@@ -112,7 +112,6 @@ var Base = (function (_Component) {
 
         var x = floor((e.clientX - left) / cellSize);
         var y = floor((e.clientY - top) / cellSize);
-        console.log(data[y][x], x, y);
         return onClick(e, data[y][x], x, y);
       };
 

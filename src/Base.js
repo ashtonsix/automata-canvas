@@ -69,7 +69,6 @@ export default class Base extends Component {
       const {top, left} = e.target.getBoundingClientRect();
       const x = floor((e.clientX - left) / cellSize);
       const y = floor((e.clientY - top) / cellSize);
-      console.log(data[y][x], x, y);
       return onClick(e, data[y][x], x, y);
     };
 
