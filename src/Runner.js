@@ -31,6 +31,10 @@ export default class Runner extends Component {
     this.state = {data};
   }
 
+  componentDidMount() {
+    if (this.props.running) this.run();
+  }
+
   shouldComponentUpdate(np) {
     const p = this.props;
     if (np.running !== p.running) {

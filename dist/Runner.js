@@ -46,6 +46,11 @@ var Runner = (function (_Component) {
   _inherits(Runner, _Component);
 
   _createClass(Runner, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.running) this.run();
+    }
+  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(np) {
       var _this = this;
