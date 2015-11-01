@@ -4,114 +4,14 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _react = require('react');
+var _Base = require('./Base');
 
-var _react2 = _interopRequireDefault(_react);
+var _Base2 = _interopRequireDefault(_Base);
 
-var floor = Math.floor;
-exports['default'] = _react2['default'].createClass({
-  displayName: 'index',
+exports['default'] = _Base2['default'];
+var AutomataRunner = require('./Runner');
 
-  propTypes: {
-    toColor: _react2['default'].PropTypes.func,
-    onClick: _react2['default'].PropTypes.func,
-    data: _react2['default'].PropTypes.array },
-
-  getDefaultProps: function getDefaultProps() {
-    return {
-      onClick: function onClick() {
-        return null;
-      } };
-  },
-
-  componentWillUpdate: function componentWillUpdate() {
-    this.oldColors = this.colors;
-  },
-
-  oldColors: [[]],
-  colors: [[]],
-  width: 0,
-  height: 0,
-
-  cellSize: function cellSize() {
-    var data = this.props.data;
-
-    var containerWidth = this.refs.canvas.parentNode.offsetWidth;
-    return floor(containerWidth / data[0].length);
-  },
-
-  updateCanvas: function updateCanvas() {
-    var _this = this;
-
-    var _props = this.props;
-    var _props$data = _props.data;
-    var data = _props$data === undefined ? [] : _props$data;
-    var _props$toColor = _props.toColor;
-    var toColor = _props$toColor === undefined ? function (v) {
-      return v;
-    } : _props$toColor;
-
-    var canvas = this.refs.canvas;
-    var context = canvas.getContext('2d');
-    var cellSize = this.cellSize();
-
-    context.setTransform(cellSize, 0, 0, cellSize, 0, 0);
-
-    this.colors = data.map(function (row, y) {
-      return row.map(function (v, x) {
-        return toColor(v, x, y);
-      });
-    });
-
-    this.colors.forEach(function (row, y) {
-      return row.forEach(function (color, x) {
-        if ((_this.oldColors[y] || [])[x] !== color) {
-          context.fillStyle = color;
-          context.fillRect(x, y, 1, 1);
-        }
-      });
-    });
-  },
-
-  render: function render() {
-    var dimensions = undefined;var cellSize = 1;
-    var _props2 = this.props;
-    var data = _props2.data;
-    var onClick = _props2.onClick;
-
-    // setTimeout & ref check cover 3 edge cases:
-    // parentNode resized
-    // data shape changed
-    // first render
-    if (this.refs.canvas) {
-      cellSize = this.cellSize();
-      dimensions = { width: data[0].length * cellSize, height: data.length * cellSize };
-      setTimeout(this.updateCanvas);
-    } else {
-      dimensions = { width: 0, height: 0 };
-      setTimeout(this.forceUpdate.bind(this));
-    }
-
-    var onClickWCoords = function onClickWCoords(e) {
-      var _e$target$getBoundingClientRect = e.target.getBoundingClientRect();
-
-      var top = _e$target$getBoundingClientRect.top;
-      var left = _e$target$getBoundingClientRect.left;
-
-      return onClick(e, floor((e.clientX - left) / cellSize), floor((e.clientY - top) / cellSize));
-    };
-
-    this.width = data[0].length;
-    this.height = data.length;
-    return _react2['default'].createElement('canvas', _extends({
-      ref: 'canvas'
-    }, dimensions, {
-      onClick: onClickWCoords,
-      style: { imageRendering: 'pixelated' }
-    }));
-  } });
-module.exports = exports['default'];
+exports.AutomataRunner = AutomataRunner;
+_Base2['default'].AutomataRunner = AutomataRunner;
