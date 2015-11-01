@@ -27,9 +27,19 @@ Or for an animated canvas:
 import {AutomataRunner as Automata} from 'automata-canvas'
 
 <Automata
-  initialData={generateData()}
-  toColor={v => v ? 'blue' : 'white'}
-  tick={gameOfLife}
+  initialData={generateData(150, 50)}
+  tick={tick}
+  toColor={v => ['white', 'blue', 'red'][v]}
+  running={this.state.running}
+  onClick={
+    (e, v, x, y) => {
+      const a = this.refs.auto;
+      const data = a.data();
+      data[y][x] = (v + 1) % (tick === briansBrain ? 3 : 2);
+      a.data(data);
+    }
+  }
+  ref='auto'
 />
 ```
 
