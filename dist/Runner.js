@@ -99,8 +99,19 @@ var Runner = (function (_Component) {
     }
   }, {
     key: 'data',
-    value: function data() {
+    value: function data(_data) {
+      if (_data) {
+        this.setState({ data: _data });return _data;
+      }
       return this.state.data;
+    }
+  }, {
+    key: 'meta',
+    value: function meta(_meta) {
+      if (_meta) {
+        this.setState({ meta: _meta });return _meta;
+      }
+      return this.state.meta;
     }
   }, {
     key: 'render',
@@ -137,7 +148,7 @@ var Runner = (function (_Component) {
         return v;
       },
       refreshRate: 1000,
-      running: false },
+      running: true },
     enumerable: true
   }]);
 
